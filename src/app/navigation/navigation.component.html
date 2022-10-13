@@ -1,0 +1,9 @@
+<div>
+  <a class="nav-link" routerLink="/registration">Registration </a>
+  <a class="nav-link" routerLink="/login" *ngIf="!authService.logIn">LogIn</a>
+  <a class ="nav-link" routerLink="" (click)="authService.logout()" *ngIf="authService.logIn">Logout</a>
+  <a class="nav-link" routerLink="/close" routerLinkActive="active" *ngIf="authService.logIn">close</a>
+</div>
+
+
+
