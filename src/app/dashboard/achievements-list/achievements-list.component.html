@@ -1,0 +1,15 @@
+<mat-list *ngFor="let category of categories | async" autosize>
+    <div mat-subheader>{{category.name | titlecase}}</div>
+    <div *ngFor="let achievement of achievements | async">
+        <mat-list-item *ngIf="achievement.categoryId==category.id">
+            <mat-icon mat-list-icon>star</mat-icon>
+            <div mat-line>{{achievement.name}}</div>
+            <div mat-line>{{achievement.description}}</div>
+            <div mat-line>
+                <mat-progress-bar mode="determinate" [value]="achievement.progress">
+                </mat-progress-bar>
+            </div>
+        </mat-list-item>
+    </div>
+    <mat-divider></mat-divider>
+</mat-list>

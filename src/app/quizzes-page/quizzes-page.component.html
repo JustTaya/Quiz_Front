@@ -1,0 +1,47 @@
+<div fxLayout="row">
+  <div fxFlex="15">
+    <mat-divider></mat-divider>
+    <button mat-raised-button routerLink="/new_quiz">Create Quiz</button>
+    <mat-divider></mat-divider>
+    <h3 align="center"><b>Categories</b></h3>
+    <button mat-raised-button (click)="setPaginationParamDefault(); getAllQuizzes();">All</button>
+    <mat-selection-list>
+      <mat-list *ngFor="let category of categories">
+        <mat-list-item>
+          <button mat-raised-button
+                  (click)="setPaginationParamDefault(); setCurrentCategory(category.id); onPageChanged($event); ">{{category.name}}</button>
+        </mat-list-item>
+      </mat-list>
+    </mat-selection-list>
+  </div>
+  <div #maincontent fxFlex="71" class="scroll">
+    <div>
+      <mat-form-field class="input-form">
+        <mat-label>Search quiz</mat-label>
+        <input matInput type="search" placeholder="Search" value="" [(ngModel)]="userRequest"
+               (ngModelChange)="this.userQuestionUpdate.next($event)">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap">
+      <div *ngFor="let quiz of quizzes" fxLayout="row wrap">
+        <app-quiz [quizData]="quiz">
+        </app-quiz>
+      </div>
+    </div>
+    <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                   (page)="onPageChanged($event); maincontent.scrollTop = 0;">
+    </mat-paginator>
+  </div>
+  <div fxFlex="14">
+    <h3 id="recommended" align="center"><b>Recommended for you</b></h3>
+    <div class="scroll">
+      <div *ngFor="let recomendedQuiz of recommendationQuizzes" fxLayout="row wrap">
+        <app-quiz [quizData]="recomendedQuiz">
+        </app-quiz>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

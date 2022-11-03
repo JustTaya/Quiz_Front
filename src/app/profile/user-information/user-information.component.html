@@ -1,0 +1,69 @@
+<div *ngIf="!isEditForm">
+  <span><p>Name: {{profile.name}}</p></span>
+  <p>Surname: {{profile.surname}}</p>
+  <p>Gender: {{profile.gender}}</p>
+  <p>Birthdate: {{profile.birthdate | date}}</p>
+  <p>City: {{profile.city}}</p>
+  <p>About me: {{profile.about}}</p>
+
+  <div (click)="isEditForm=true">
+    <div>
+      <button mat-raised-button *ngIf="id==currentUserId">Edit profile</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="isEditForm">
+  <form (ngSubmit)="ngSubmit()">
+    <div>
+      <mat-form-field class="width-45">
+        <mat-label>Name</mat-label>
+        <input name="name" matInput placeholder="Name" [(ngModel)]="profile.name"/>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="width-45">
+        <mat-label>Surname</mat-label>
+        <input name="surname" matInput placeholder="Name" [(ngModel)]="profile.surname"/>
+      </mat-form-field>
+      <br>
+
+      <mat-radio-group [(ngModel)]="profile.gender" [formControl]="floatLabelControl">
+        <mat-label>Gender</mat-label>
+        <br>
+        <br>
+        <mat-radio-button  value="MALE">Male</mat-radio-button>
+        <mat-radio-button  value="FEMALE">Female</mat-radio-button>
+        <mat-radio-button  value="NOT_MENTIONED">Not mentioned</mat-radio-button>
+      </mat-radio-group>
+      <br>
+
+
+      <mat-form-field class="width-45">
+        <mat-label>Birtdate</mat-label>
+        <input type="date" name="birthdate" matInput placeholder="Birthdate" [(ngModel)]="profile.birthdate"/>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="width-45">
+        <mat-label>City</mat-label>
+        <input name="city" matInput placeholder="City" [(ngModel)]="profile.city"/>
+      </mat-form-field>
+      <br>
+
+
+      <mat-form-field class="width-45">
+        <mat-label>Textarea</mat-label>
+        <textarea matInput name="about" placeholder="About" [(ngModel)]="profile.about"></textarea>
+      </mat-form-field>
+      <br>
+
+      <button mat-raised-button type="submit" class="width-45">Submit</button>
+
+    </div>
+  </form>
+  <br>
+  <button mat-raised-button (click)="closeEditForm()" class="width-45">Cancel</button>
+</div>
+

@@ -1,0 +1,41 @@
+<mat-form-field class="input-form">
+  <mat-label>Search quiz</mat-label>
+  <input matInput type="search" placeholder="Search" value="" [(ngModel)]="userRequest"
+         (ngModelChange)="this.userQuestionUpdate.next($event)">
+</mat-form-field>
+<div id="table" class="mat-elevation-z8">
+  <table mat-table [dataSource]="friends" class="mat-elevation-z8" matSort (matSortChange) = "sortFriends($event)">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element" ><a routerLink=""
+                                                (click)="checkOut(element.id, element.email)">
+        {{element.name}} {{element.surname}}</a></td>
+    </ng-container>
+
+    <ng-container matColumnDef="rating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+      <td mat-cell *matCellDef="let element"> {{element.rating}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell  *matCellDef>
+        <button mat-icon-button>
+          <mat-icon>chat</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                 (page)="onPageChanged($event)">
+  </mat-paginator>
+</div>
+
+

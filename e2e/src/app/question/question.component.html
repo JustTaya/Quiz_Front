@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <form [formGroup]="questionForm">
+        <mat-form-field class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput id="text" type="text" formControlName="text" class="form-control" maxlength="360"
+                required></textarea>
+            <mat-error
+                *ngIf="questionForm.get('text').errors?.required && (submitted ||questionForm.get('text').touched || questionForm.get('text').dirty)"
+                class="alert alert-danger">Question
+                cannot be empty. </mat-error>
+            <mat-error *ngIf="questionForm.get('text').errors?.maxlength" class="alert alert-danger">Question can be max
+                30 characters long.</mat-error>
+        </mat-form-field>
+        <app-image-upload> </app-image-upload>
+
+        <mat-form-field class="form-field">
+            <mat-label>Answer type</mat-label>
+            <mat-select id="type" formControlName="type" class="form-control"
+                (selectionChange)="onOptionSelected($event.value)">
+                <mat-option *ngFor='let type of questionTypes' [value]="type">
+                    {{type.value | titlecase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <h3>Answers</h3>
+        <ng-template #dynamicComponent></ng-template>
+    </form>
+</div>

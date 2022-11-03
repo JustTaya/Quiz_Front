@@ -1,0 +1,118 @@
+<mat-drawer-container class="achievement-container">
+
+  <mat-drawer #ratingNavbar (backdropClick)="ratingClose()" (keydown.escape)="ratingClose()" mode="side"
+    *ngIf="ratingIsOpen" position="end">
+    <p><button mat-flat-button (click)="ratingClose()" color="accent">Close</button></p>
+    <app-rating-list [userId]="userId" [ratingPos]="rating"></app-rating-list>
+  </mat-drawer>
+
+  <mat-drawer #achievementsNavbar (backdropClick)=" achievementsClose()" (keydown.escape)="achievementsClose()"
+    mode="side" *ngIf="achievementIsOpen" position="end">
+    <p><button mat-flat-button (click)="achievementsClose()" color="accent">Close</button></p>
+    <app-achievements-list [userId]="userId"></app-achievements-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="background" fxLayout.gt-sm="row" fxLayout.gt-xs="column" fxLayoutWrap fxLayoutGap="3rem"
+      fxLayoutAlign="center">
+      <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="starts">
+        <h2>Progress</h2>
+
+        <mat-card id="profile-card">
+          <mat-card-content fxLayout="row" fxLayoutAlign="space-around">
+            <img mat-card-image id="profile-img" [src]="(profileImage | async)"
+              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+              alt="Profile image" fxFlexAlign="end">
+          </mat-card-content>
+          <mat-card-actions fxLayoutAlign="space-around">
+            <button mat-raised-button id="profile-button" class="text" fxFlexAlign="end" color="accent">Go to
+              Profile</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card id="rating-card" (click)="ratingOpen()">
+          <div>
+            <h2 class="text">{{rating |async}}<sup>TH</sup></h2>
+          </div>
+          <mat-card-footer class="rating">
+            <h3>Rating</h3>
+          </mat-card-footer>
+        </mat-card>
+        <mat-card id="achievement-card" (click)="achievementsOpen()">
+          <div>
+            <h2 class="text">{{achievementsForUser |async}} / {{achievementsTotal |async}}</h2>
+          </div>
+          <mat-card-footer class="rating">
+            <h3>Achievements</h3>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+
+      <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="start">
+        <h2>Recent activity</h2>
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="start">
+          <mat-card class="game-card" *ngFor="let quiz of recentQuizzes |async;let i=index">
+            <img mat-card-image class="card-image" [src]="getQuizImage(quiz.id) | async"
+              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+              alt="Game image" fxFlexAlign="end">
+            <mat-card-content class="quiz-name" fxLayout="column" fxLayoutAlign="space-between" fxFlexAlign="center">
+              <h3>{{quiz.name}}</h3>
+            </mat-card-content>
+          </mat-card>
+          <h3 *ngIf="(recentQuizzes |async)==null">No recent activity</h3>
+        </div>
+
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="space-between">
+          <h2>Top quizzes</h2>
+
+          <mat-form-field>
+            <mat-label>Select category</mat-label>
+            <mat-select [(value)]="quizCategory" (selectionChange)="onQuizCategorySelected($event.value)">
+              <mat-option [value]="-1">View all</mat-option>
+              <mat-option *ngFor='let category of categories |async' [value]="category.id">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="start">
+          <mat-card class="game-card" *ngFor="let quiz of topQuizzes |async;let i=index">
+            <img mat-card-image class="card-image" [src]="getQuizImage(quiz.id) | async"
+              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+              alt="Quiz image" fxFlexAlign="end">
+            <mat-card-content class="quiz-name" fxLayout="column" fxLayoutAlign="space-between" fxFlexAlign="center">
+              <h3>{{quiz.name}}</h3>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <h2>Recommendations</h2>
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="start">
+          <mat-card class="game-card" *ngFor="let quiz of recommendationQuizzes |async;let i=index">
+            <img mat-card-image class="card-image" [src]="getQuizImage(quiz.id) | async"
+              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+              alt="Quiz image" fxFlexAlign="end">
+            <mat-card-content class="quiz-name" fxLayout="column" fxLayoutAlign="space-between" fxFlexAlign="center">
+              <h3>{{quiz.name}}</h3>
+            </mat-card-content>
+          </mat-card>
+          <h3 *ngIf="(recommendationQuizzes |async)==null">Play some games to get recommendations</h3>
+        </div>
+
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="space-between">
+          <h2>Announcements</h2>
+          <mat-select class="categories" placeholder="Categories" fxFlexAlign="end">
+            View all
+          </mat-select>
+        </div>
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="center">
+          <mat-card class="announcements">
+
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>

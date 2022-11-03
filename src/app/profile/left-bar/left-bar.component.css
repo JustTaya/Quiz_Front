@@ -1,0 +1,16 @@
+#changeImg{
+  width: 30px;
+}
+
+.card {
+  margin-right: 30px;
+  margin-top: 90px;
+}
+
+button {
+ width: 150px;
+}
+
+mat-card {
+  max-width: 250px;
+}

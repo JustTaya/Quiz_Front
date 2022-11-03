@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="image-input">
+    <mat-form-field class="image-name">
+        <mat-label #imageLabel class="custom-file-label" for="inputGroupFile01" ng-bind="name">{{name}}</mat-label>
+        <input #imageInput style="display: none;" id="image" type="file" accept="image/*" aria-label="Select image"
+            (change)="processFile(imageInput)">
+        <input matInput disabled>
+    </mat-form-field>
+    <button mat-raised-button class="input-group-text" id="inputGroupFileAddon01"
+        (click)="imageInput.click()">Image</button>
+</div>

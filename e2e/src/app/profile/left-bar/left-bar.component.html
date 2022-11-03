@@ -1,0 +1,39 @@
+<mat-card class="card" >
+
+  <img mat-card-image [src]="file" height="250" width="250">
+  <br>
+  <div fxLayout="column">
+    <div fxLayoutAlign="end">
+      <button mat-icon-button id="changeImg" (click)="image.click()" *ngIf="currentUserId==id"  >
+        <input style="display: none" type="file" accept="image/*" (change)="fileProgress($event)" #image>
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    </div>
+
+  </div>
+  <mat-card-content fxLayoutAlign="center">
+    <p>{{username}}</p>
+
+  </mat-card-content >
+  <mat-card-actions fxLayout="column" fxLayoutAlign="center center" *ngIf="currentUserId==id">
+    <button mat-raised-button [routerLink]="[{outlets: {profilenav: 'changePass'}}]" >Change password</button>
+    <br>
+
+
+    <mat-form-field>
+      <mat-label>Notification status</mat-label>
+      <mat-select [(value)]="notificationStatus">
+        <mat-option value="ON" (click)="change()">ON</mat-option>
+        <mat-option value="OFF" (click)="change()">OFF</mat-option>
+        <mat-option value="FRIENDS_ONLY" (click)="change()">FRIENDS_ONLY</mat-option>
+        <mat-option value="SYSTEM_ONLY" (click)="change()">SYSTEM_ONLY</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-actions>
+</mat-card>
+
+
+
+
+
+

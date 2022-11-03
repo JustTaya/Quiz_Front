@@ -1,0 +1,26 @@
+<div class="container">
+    <form [formGroup]="answerForm">
+        <ol formArrayName="items">
+            <li *ngFor="let item of items.controls; let i=index">
+                <div [formGroupName]="i">
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Enter answer name</mat-label>
+                        <input matInput class="form-control" placeholder="Answer" formControlName="text">
+                        <mat-error
+                            *ngIf="items.controls[i].get('text').errors?.required && (submitted || items.controls[i].get('text').touched || items.controls[i].get('text').dirty)"
+                            class="alert alert-danger">Should have at
+                            least two answers.
+                        </mat-error>
+                        <mat-error *ngIf="items.controls[i].get('text').errors?.maxlength" class="alert alert-danger">
+                            Answer
+                            can be max 30 characters long. </mat-error>
+                        <mat-error *ngIf="items.controls[i].errors?.mustExist" class="alert alert-danger">Add text. Next
+                            answer is not empty. </mat-error>
+                    </mat-form-field>
+                    <app-image-upload></app-image-upload>
+                    <hr *ngIf="i!=items.controls.length-1" class="my-4">
+                </div>
+            </li>
+        </ol>
+    </form>
+</div>

@@ -1,0 +1,61 @@
+<div>
+    <table mat-table matColumnDef="position" [dataSource]="topUsers | async">
+        class="mat-elevation-z8">
+        <ng-container matColumnDef="position">
+            <div *matHeaderCellDef>No.</div>
+            <div *matCellDef="let user; let i=index" [style.color]="user.id==userId ? 'yellow' : 'black'">{{i+1}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <div *matHeaderCellDef>Name</div>
+            <div *matCellDef="let user">{{user.name}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+            <div *matHeaderCellDef>Surname</div>
+            <div class="description-cell" *matCellDef="let user" [style.color]="user.id==userId ? 'yellow' : 'black'">
+                {{user.surname}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="rating">
+            <div *matHeaderCellDef>Rating</div>
+            <div class="duration-cell" *matCellDef="let user" [style.color]="user.id==userId ? 'yellow' : 'black'">
+                {{user.rating}}</div>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns; let i=index"></mat-row>
+    </table>
+
+    <mat-icon mat-list-icon *ngIf="((ratingPos|async)-range)>=topNumber">more_horiz</mat-icon>
+
+
+    <table mat-table matColumnDef=" position" [dataSource]="nearUsers | async">
+        class="mat-elevation-z8">
+
+        <ng-container matColumnDef="position">
+            <div *matCellDef="let user; let i=index" [style.color]="user.id==userId ? 'red' : 'black'">
+                {{i+(ratingPos|async)-range+1}}
+            </div>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <div *matCellDef="let user" [style.color]="user.id==userId ? 'red' : 'black'">{{user.name}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+            <div class="description-cell" *matCellDef="let user" [style.color]="user.id==userId ? 'red' : 'black'">
+                {{user.surname}}</div>
+        </ng-container>
+
+        <ng-container matColumnDef="rating">
+            <div class="duration-cell" *matCellDef="let user" [style.color]="user.id==userId ? 'red' : 'black'">
+                {{user.rating}}</div>
+        </ng-container>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns; let i=index"
+            [class.hidden]="(i+(ratingPos|async)-range)<=topNumber">
+        </mat-row>
+    </table>
+</div>
