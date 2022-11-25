@@ -1,18 +1,23 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <a mat-button routerLink="/">QUIZ</a>
+    <a mat-button routerLink="/dashboard">QUIZ</a>
     <a mat-button routerLink="/quizzes">Quizzes</a>
     <span class="spacer"></span>
+
+    <mat-form-field appearance="outline" style="margin-bottom: -1.25em">
+      <input matInput #gameId type="number" placeholder="Game id" (keydown.enter)="toGame(gameId.value)">
+    </mat-form-field>
+
     <a mat-button routerLink="/register" *ngIf="!authService.logIn">Register</a>
     <a mat-button routerLink="/login" *ngIf="!authService.logIn">Login</a>
-    <a
-      mat-button [routerLink]="['profile', id, {outlets: {profilenav: 'profinfo'}}]" *ngIf="authService.logIn">{{username}}</a>
+    <a mat-button [routerLink]="['profile', id, {outlets: {profilenav: 'profinfo'}}]"
+      *ngIf="authService.logIn">{{username}}</a>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button
-        mat-menu-item [routerLink]="['profile', id, {outlets: {profilenav: 'profinfo'}}]" *ngIf="authService.logIn">
+      <button mat-menu-item [routerLink]="['profile', id, {outlets: {profilenav: 'profinfo'}}]"
+        *ngIf="authService.logIn">
         <mat-icon>assignment_ind</mat-icon>
         <span>Profile</span>
       </button>

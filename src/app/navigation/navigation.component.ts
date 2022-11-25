@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../service/loginService/authentication.service';
-import {Router} from "@angular/router";
+import { AuthenticationService } from '../service/loginService/authentication.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -11,21 +11,26 @@ export class NavigationComponent implements OnInit {
   currentUser: any;
   username: string;
   id: string;
+
   constructor(public authService: AuthenticationService,
-              private router: Router) {
+    private router: Router) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (this.currentUser != null){
+    if (this.currentUser != null) {
       this.username = this.currentUser.email;
       this.id = this.currentUser.id;
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  toProfile(){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['profile', this.id, {outlets: {profilenav: 'profinfo'}}]);
+  toProfile() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['profile', this.id, { outlets: { profilenav: 'profinfo' } }]);
     });
+  }
+
+  toGame(gameId: number) {
+    this.router.navigateByUrl(`/game/start/${gameId}`);
   }
 
 }

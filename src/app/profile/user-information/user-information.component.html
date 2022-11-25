@@ -1,5 +1,7 @@
 <div *ngIf="!isEditForm">
-  <span><p>Name: {{profile.name}}</p></span>
+  <span>
+    <p>Name: {{profile.name}}</p>
+  </span>
   <p>Surname: {{profile.surname}}</p>
   <p>Gender: {{profile.gender}}</p>
   <p>Birthdate: {{profile.birthdate | date}}</p>
@@ -20,12 +22,12 @@
     <div>
       <mat-form-field class="width-45">
         <mat-label>Name</mat-label>
-        <input name="name" matInput placeholder="Name" [(ngModel)]="profile.name"/>
+        <input name="name" matInput placeholder="Name" [(ngModel)]="profile.name" />
       </mat-form-field>
       <br>
       <mat-form-field class="width-45">
         <mat-label>Surname</mat-label>
-        <input name="surname" matInput placeholder="Name" [(ngModel)]="profile.surname"/>
+        <input name="surname" matInput placeholder="Name" [(ngModel)]="profile.surname" />
       </mat-form-field>
       <br>
 
@@ -33,22 +35,22 @@
         <mat-label>Gender</mat-label>
         <br>
         <br>
-        <mat-radio-button  value="MALE">Male</mat-radio-button>
-        <mat-radio-button  value="FEMALE">Female</mat-radio-button>
-        <mat-radio-button  value="NOT_MENTIONED">Not mentioned</mat-radio-button>
+        <mat-radio-button value="MALE">Male</mat-radio-button>
+        <mat-radio-button value="FEMALE">Female</mat-radio-button>
+        <mat-radio-button value="NOT_MENTIONED">Not mentioned</mat-radio-button>
       </mat-radio-group>
       <br>
 
 
       <mat-form-field class="width-45">
         <mat-label>Birtdate</mat-label>
-        <input type="date" name="birthdate" matInput placeholder="Birthdate" [(ngModel)]="profile.birthdate"/>
+        <input type="date" name="birthdate" matInput placeholder="Birthdate" [(ngModel)]="profile.birthdate" />
       </mat-form-field>
       <br>
 
       <mat-form-field class="width-45">
         <mat-label>City</mat-label>
-        <input name="city" matInput placeholder="City" [(ngModel)]="profile.city"/>
+        <input name="city" matInput placeholder="City" [(ngModel)]="profile.city" />
       </mat-form-field>
       <br>
 
@@ -66,4 +68,3 @@
   <br>
   <button mat-raised-button (click)="closeEditForm()" class="width-45">Cancel</button>
 </div>
-

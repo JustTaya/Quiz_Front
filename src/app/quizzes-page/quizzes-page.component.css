@@ -4,12 +4,17 @@ button {
 }
 
 .scroll {
+  max-height: 950px;
+  overflow: scroll;
+}
+
+.scrollRec {
   max-height: 900px;
   overflow: scroll;
 }
 
 mat-selection-list {
-  max-height: 765px;
+  max-height: 900px;
   overflow: scroll;
 }
 
@@ -22,3 +27,26 @@ mat-selection-list {
   margin-top: 6px;
   margin-bottom: 3px;
 }
+
+.create_button {
+  background: grey;
+}
+
+.input {
+  margin-left: 20px;
+  max-width: 200px;
+  width: 100%;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+
+mat-paginator {
+  width: 50%;
+  margin-left: 49%;
+}
+
+.main {
+  margin-left: 9px;
+}
+

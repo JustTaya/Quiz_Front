@@ -6,7 +6,7 @@ import { OptionalAnswerComponent } from './../optional-answer/optional-answer.co
 import { AnswerComponent } from './../answer/answer.component';
 import { QuestionService } from './../service/questionService/question.service';
 import { Question, QuestionType } from './../models/question.model';
-import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef, AfterViewInit, ComponentRef } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef, AfterViewInit, ComponentRef, ComponentFactory } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { map, mergeMap, defaultIfEmpty } from 'rxjs/operators';
@@ -36,7 +36,8 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     quizId: null,
     type: QuestionType.OPTION,
     text: "",
-    active: true
+    active: true,
+    answerList: null
   };
   image: File = null;
 
@@ -63,8 +64,10 @@ export class QuestionComponent implements OnInit, AfterViewInit {
     this.loadComponent(QuestionType.OPTION.toString());
   }
 
-  loadComponent(value: String) {
-    var componentFactory
+  loadComponent(value: string) {
+    let titleCasePipe = new TitleCasePipe();
+    value = titleCasePipe.transform(value);
+    var componentFactory: ComponentFactory<AnswerComponent>;
     switch (value) {
       case QuestionType.OPTION:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(OptionalAnswerComponent);

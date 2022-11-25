@@ -1,0 +1,23 @@
+<div class="container" *ngIf="(game$|async) as game">
+    <mat-card>
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between" *ngIf="game.hostId==player.userId">
+            <h1> Game Start</h1>
+            <div>
+                <button mat-raised-button class="start-button" color="accent" (click)="startGame()">Start
+                </button>
+            </div>
+        </mat-card-header>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="start">
+            <div class="user-list" fxFlexAlign="center"></div>
+            <h2>Connected users</h2>
+            <mat-card>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let player of game.players">
+                        {{player.userName}}
+                    </mat-list-item>
+                </mat-list>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

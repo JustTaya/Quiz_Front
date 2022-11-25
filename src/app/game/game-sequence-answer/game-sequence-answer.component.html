@@ -1,0 +1,11 @@
+<div class="container" fxLayout="column">
+    <p fxFlexAlign="center">Tap and hold to arrange the tiles in the correct order</p>
+    <div fxLayout="row" fxLayoutAlign="space-evenly">
+        <div cdkDropList cdkDropListOrientation="horizontal" class="list" (cdkDropListDropped)="drop($event)">
+            <div class="box" *ngFor="let answer of answers" cdkDrag fxLayout="row" fxLayoutAlign="center"><img
+                    matCardImage src="https://material.angular.io/assets/img/examples/shiba2.jpg"><span
+                    fxFlexAlign="center">{{answer.text}}</span>
+            </div>
+        </div>
+    </div>
+</div>

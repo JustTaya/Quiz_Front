@@ -8,7 +8,8 @@
     <app-quiz [quizData]="quiz">
     </app-quiz>
   </div>
-  <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                 (page)="onPageChanged($event); maincontent.scrollTop = 0;">
-  </mat-paginator>
+
 </div>
+<mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+               (page)="onPageChanged($event); maincontent.scrollTop = 0;">
+</mat-paginator>

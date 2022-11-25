@@ -1,1 +1,22 @@
-<p>quiz-dialog works!</p>
+<div mat-dialog-content>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <h2>{{data.quizData.name}}</h2>
+    <div>
+        <p class="header">Category </p>
+        <p>{{data.quizData.category}}</p>
+    </div>
+    <div>
+        <p class="header">Tags </p>
+        <mat-chip-list>
+            <mat-chip *ngFor="let tag of data.quizData.tags">{{tag}}</mat-chip>
+        </mat-chip-list>
+    </div>
+    <div>
+        <p class="header">Description </p>
+        <p>{{data.quizData.description}}</p>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-flat-button (click)="onStartClick()" color="accent" *ngIf="isLogin">Start Game</button>
+    <button mat-flat-button mat-dialog-close>Close</button>
+</div>

@@ -1,3 +1,4 @@
+import { CurrentUserService } from './../service/current-user.service';
 import { mergeMap, map, defaultIfEmpty } from 'rxjs/operators';
 import { TagService } from './../service/tagService/tag.service';
 import { Router } from '@angular/router';
@@ -37,7 +38,7 @@ export class NewQuizComponent implements OnInit {
   quiz: Quiz = {
     id: 0,
     name: "",
-    author: 2,
+    author: parseInt(this.currentUserService.getCurrentUser().id),
     category_id: 1,
     date: new Date().toISOString(),
     description: "",
@@ -50,6 +51,7 @@ export class NewQuizComponent implements OnInit {
     private newQuizService: NewQuizService,
     private tagService: TagService,
     private formBuilder: FormBuilder,
+    private currentUserService: CurrentUserService,
     private router: Router) { }
 
   ngOnInit(): void {

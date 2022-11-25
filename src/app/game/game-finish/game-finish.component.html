@@ -1,0 +1,26 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
+            <h1> Game results</h1>
+            <div>
+                <button mat-raised-button class="start-button" color="accent" (click)="quitGame()">Quit
+                </button>
+            </div>
+        </mat-card-header>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="start">
+            <div class="user-list" fxFlexAlign="center"></div>
+            <h2>Rating</h2>
+            <mat-card>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let player of rating |async">
+                        <div class="mat-list-item-content" fxLayout="row" fxLayoutAlign="space-between">
+                            <p fxFlexAlign="center">{{player.userName}}</p>
+                            <p fxFlexAlign="center"> {{player.userScore}}</p>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

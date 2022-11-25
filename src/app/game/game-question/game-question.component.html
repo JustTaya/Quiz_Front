@@ -1,0 +1,30 @@
+<div class="container">
+    <mat-card fxLayout="column" fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutAlign="start">
+            <mat-card-header fxLayout="row" fxLayoutAlign="center">
+                <mat-card-title>Question {{questionNumber}} : {{question.text}}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-grid-list class="image" cols="6" rowHeight="20rem">
+                    <mat-grid-tile [colspan]="image?2:6">
+                        <div>
+                            <mat-progress-spinner [value]="100*(questionTimer/initTime)" fxFlexAlign="center">
+                            </mat-progress-spinner>
+                            <div id="time" fxFlexAlign="center">
+                                <h3>{{questionTimer}} sec</h3>
+                            </div>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="image" colspan="4" *ngIf="image!=null">
+                        <div class="w-100">
+                            <img matCardImage src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                                fxFlexAlign="center">
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card-content>
+        </div>
+        <ng-template #dynamicComponent></ng-template>
+    </mat-card>
+</div>

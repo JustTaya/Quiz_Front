@@ -1,0 +1,17 @@
+.answer-option {
+    margin: 1rem !important;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    height: 5rem;
+    width: 100%;
+}
+
+img {
+    width: 3rem;
+    margin: 0 !important;
+}

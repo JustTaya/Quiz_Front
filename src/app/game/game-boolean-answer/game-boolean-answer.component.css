@@ -1,0 +1,30 @@
+.answer-button {
+    width: 25rem;
+}
+
+div, mat-button-toggle-group, material-card {
+    background: none !important;
+    opacity: 100 !important;
+}
+
+mat-button-toggle {
+    background-color: #ffd740 !important;
+    color: #424242;
+    font-weight: bold;
+    text-align: center;
+    width: 25rem;
+}
+
+mat-button-toggle:hover {
+    background-color: #ffd740 !important;
+}
+
+.mat-button-toggle-checked {
+    background-color: #fafafa !important;
+    color: #ffd740 !important;
+}
+
+.mat-button-toggle-checked:hover {
+    background-color: #f5f5f5!important;
+    color: #ffd740 !important;
+}

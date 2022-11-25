@@ -1,0 +1,12 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+    <mat-form-field class="answer-input" appearance="outline">
+        <mat-label>Enter your answer</mat-label>
+        <input matInput placeholder="Answer" [formControl]="stringAnswer" maxlength="30" required>
+        <mat-error *ngIf="stringAnswer.invalid && (stringAnswer.dirty|| stringAnswer.touched)"
+            class="alert alert-danger">
+            <mat-error *ngIf="stringAnswer.errors.required">
+                Answer is required.
+            </mat-error>
+        </mat-error>
+    </mat-form-field>
+</div>

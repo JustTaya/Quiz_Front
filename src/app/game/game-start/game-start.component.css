@@ -1,0 +1,43 @@
+.container {
+    margin: 3rem;
+    height: 50rem;
+}
+
+h2 {
+    width: auto;
+}
+
+mat-list {
+    max-width: 100%;
+}
+
+.settings {
+    margin-bottom: 5rem;
+}
+
+.user-list {
+    margin-top: 3rem;
+}
+
+hr {
+    width: 90%;
+}
+
+.user-list {
+    width: 90%;
+}
+
+.avatar {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem 3rem 1rem 1rem;
+    border-radius: 50%;
+}
+
+mat-list-item {
+    margin: 0.5rem;
+}
+
+.start-button {
+    width: 10em;
+}

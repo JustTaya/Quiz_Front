@@ -11,13 +11,13 @@
       </button>
     </div>
   </mat-card-header>
-  <img mat-card-image class="image" [src] = quizImage>
+  <img mat-card-image class="image" [src]=quizImage>
   <mat-card-content>
     <mat-chip-list>
       <mat-chip *ngFor="let tag of quizData.tags">{{tag}}</mat-chip>
     </mat-chip-list>
   </mat-card-content>
-  <mat-card-actions >
-    <button id="openButton" [disableRipple]="true"  mat-button>OPEN</button>
+  <mat-card-actions>
+    <button id="openButton" [disableRipple]="true" (click)="openDialog()" mat-button>OPEN</button>
   </mat-card-actions>
 </mat-card>

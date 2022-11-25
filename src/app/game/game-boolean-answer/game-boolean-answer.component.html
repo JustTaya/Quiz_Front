@@ -1,0 +1,7 @@
+<div class="container" fxLayout="row" fxLayoutAlign="space-evenly">
+    <mat-button-toggle-group>
+        <mat-button-toggle class="answer-button" color="accent" *ngFor="let option of options"
+            (click)="onAnswerClick(option)">
+            {{option | titlecase}}</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
