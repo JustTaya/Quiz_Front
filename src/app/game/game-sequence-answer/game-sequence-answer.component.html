@@ -3,7 +3,7 @@
     <div fxLayout="row" fxLayoutAlign="space-evenly">
         <div cdkDropList cdkDropListOrientation="horizontal" class="list" (cdkDropListDropped)="drop($event)">
             <div class="box" *ngFor="let answer of answers" cdkDrag fxLayout="row" fxLayoutAlign="center"><img
-                    matCardImage src="https://material.angular.io/assets/img/examples/shiba2.jpg"><span
+                    matCardImage [src] = "answer.image" alt="https://material.angular.io/assets/img/examples/shiba2.jpg"><span
                     fxFlexAlign="center">{{answer.text}}</span>
             </div>
         </div>

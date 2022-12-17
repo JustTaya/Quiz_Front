@@ -1,0 +1,45 @@
+<h2 align ="center"> Quiz info </h2>
+<div *ngIf="quiz">
+  <div class="container" >
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-card class="info-card" >
+        <mat-card-header>
+          <mat-card-title>{{quiz.name}}</mat-card-title>
+          <mat-card-subtitle>{{quiz.category}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+    <p>Author: {{quiz.authorName}} {{quiz.authorSurname}}</p>
+          <mat-divider></mat-divider>
+    <p>Date: {{quiz.date | date}}</p>
+          <mat-divider></mat-divider>
+    <p>Description: {{quiz.description}}</p>
+          <mat-divider></mat-divider>
+    <p>Status: {{quiz.status}}</p>
+          <mat-divider></mat-divider>
+    <p>Modification time: {{quiz.modificationTime | date}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngIf="comments">
+      <h2 align="center">Moderator`s comments history</h2>
+    <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let q of comments; index as i">
+      <mat-card class="example-card" >
+    <mat-card-header>
+      <mat-card-title> Quiz rejected by <a class="nav-link" routerLink=""
+                                           (click)="checkOut(q.moderatorId)">
+        {{q.moderatorName}} {{q.moderatorSurname}}</a></mat-card-title>
+      <mat-card-subtitle>{{q.commentDate | date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="comment-title">
+        Moderator comment:
+      </div>
+      <div class="comment">
+                  {{q.comment}}
+        </div>
+    </mat-card-content>
+      </mat-card>
+  </div>
+  </div>
+  </div>
+</div>

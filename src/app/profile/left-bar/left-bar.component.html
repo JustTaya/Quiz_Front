@@ -1,6 +1,6 @@
 <mat-card class="card" >
 
-  <img mat-card-image [src]="file" height="250" width="250">
+  <img mat-card-image [src]="imageUrl" height="250" width="250">
   <br>
   <div fxLayout="column">
     <div fxLayoutAlign="end">
@@ -20,7 +20,7 @@
     <br>
 
 
-    <mat-form-field>
+<!--    <mat-form-field>
       <mat-label>Notification status</mat-label>
       <mat-select [(value)]="notificationStatus">
         <mat-option value="ON" (click)="change()">ON</mat-option>
@@ -28,7 +28,7 @@
         <mat-option value="FRIENDS_ONLY" (click)="change()">FRIENDS_ONLY</mat-option>
         <mat-option value="SYSTEM_ONLY" (click)="change()">SYSTEM_ONLY</mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field>-->
   </mat-card-actions>
 </mat-card>
 

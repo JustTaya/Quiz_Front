@@ -1,0 +1,52 @@
+.example-card {
+  min-width: 650px;
+  border: 1px;
+  margin: 5px;
+  background-color: ghostwhite;
+}
+
+.true-answer-div{
+  border-radius: 3px;
+  margin: 5px;
+  padding: 10px;
+  background-color: lightgreen;
+}
+.false-answer-div{
+  border-radius: 3px;
+  margin: 5px;
+  padding: 10px;
+  background-color: lightgrey;
+}
+.checkBox{
+  padding-left: 6px;
+}
+.mat-button-send{
+  margin: 10px;
+  background-color: lightgrey;
+  border-radius: 3px;
+  border-color: darkgrey;
+  display: flex;
+  justify-content: center;
+}
+.mat-button-active{
+  background-color: lightgreen;
+  border-radius: 3px;
+  border-color: darkgrey;
+  margin: 10px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+.reject-comment{
+  background-color: lightsalmon;
+}
+.reject-comment:hover{
+  background-color: salmon !important;
+}
+.form-field{
+  display: flex;
+  justify-content: center;
+}
+
+

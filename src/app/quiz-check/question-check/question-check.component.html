@@ -1,0 +1,51 @@
+<div *ngIf="quiz">
+  <form [formGroup]="commentForm" (ngSubmit)="commentFormValidation()">
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let q of quiz.questions; index as iq">
+  <mat-card class="example-card" >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-subtitle> Id {{q.id}} type {{q.type}}</mat-card-subtitle>
+      <mat-card-title >Question {{iq+1}}: {{q.text}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div   *ngFor="let a of q.answers; index as ia">
+      <div class="true-answer-div" *ngIf="a.correct">
+        {{ia+1}}) {{a.text}}
+      </div>
+        <div class="false-answer-div" *ngIf="!a.correct">
+            {{ia+1}}) {{a.text}}
+        </div>
+      </div>
+    </mat-card-content>
+    <div class="checkBox">
+    <mat-checkbox [labelPosition]="labelPosition" class="example-checkbox" (change)="checkCount(q.id);">Checked</mat-checkbox>
+    </div>
+  </mat-card>
+</div>
+<br><div fxLayout="column">
+      <mat-accordion >
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="reject-comment">
+            <mat-panel-title>
+              Reject
+            </mat-panel-title>
+            <mat-panel-description>
+              Leave a comment, why it was rejected
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+  <mat-form-field class="form-field" fxLayout="column" >
+    <textarea matInput row="5" class="form-control" formControlName="comment"
+              placeholder="Comment"></textarea>
+  </mat-form-field>
+          <div fxLayout="column">
+  <button class = "mat-button-send"  mat-flat-button type="submit">Send and reject</button>
+          </div>
+        </mat-expansion-panel>
+          </mat-accordion>
+    <button class = "mat-button-active" fxLayout="column" mat-flat-button *ngIf="allChecked()" (click)="activeQuiz()">Approve</button>
+    </div>
+  </form>
+  <br>
+  <br>
+</div>
+

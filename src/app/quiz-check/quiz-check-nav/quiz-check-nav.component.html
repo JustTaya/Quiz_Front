@@ -1,0 +1,6 @@
+<nav mat-tab-nav-bar *ngIf="currentQuiz.id == id">
+  <a mat-tab-link [routerLink]="[{outlets: {quiznav: 'quizinfo'}}]"
+     routerLinkActive #quizInfo="routerLinkActive" [active]="quizInfo.isActive">Quiz Info</a>
+  <a mat-tab-link [routerLink]="[{outlets: {quiznav: 'qAnda'}}]"
+     routerLinkActive #qAnda="routerLinkActive" [active]="qAnda.isActive">Content</a>
+</nav>

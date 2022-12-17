@@ -1,0 +1,13 @@
+form {
+    align-self: center;
+    width: 100%;
+}
+
+.form-field {
+    width: 100%;
+}
+
+#checkbox {
+    margin-bottom: 1rem;
+}
+

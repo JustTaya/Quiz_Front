@@ -5,8 +5,8 @@
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
         <input  matInput formControlName="email"  placeholder="Email" name="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
-        <mat-error *ngIf="f.email.errors.required">Email is required</mat-error>
-        <mat-error *ngIf="f.email.errors.email">Email must be a valid email address</mat-error>
+        <mat-error *ngIf="f.email.errors?.required">Email is required</mat-error>
+        <mat-error *ngIf="f.email.errors?.email">Email must be a valid email address</mat-error>
       </mat-form-field>
       <br>
 
@@ -14,16 +14,16 @@
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
         <input type="password"  matInput formControlName="password"  placeholder="Password"  name="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required/>
-        <mat-error *ngIf="f.password.errors.required">Password is require</mat-error>
-        <mat-error *ngIf="f.password.errors.pattern">Must contain at least 8 or more characters</mat-error>
+        <mat-error *ngIf="f.password.errors?.required">Password is require</mat-error>
+        <mat-error *ngIf="f.password.errors?.pattern">Must contain at least 8 or more characters</mat-error>
       </mat-form-field>
       <br>
 
       <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input type="password"  matInput  placeholder="Password" formControlName="confirmPassword"  name="password" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-        <mat-error *ngIf="f.confirmPassword.errors.required">Confirm Password is required</mat-error>
-        <mat-error *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</mat-error>
+        <mat-label>Confirm password</mat-label>
+        <input type="password"  matInput  placeholder="Password" formControlName="confirmPassword"  name="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        <mat-error *ngIf="f.confirmPassword.errors?.required">Confirm Password is required</mat-error>
+        <mat-error *ngIf="f.confirmPassword.errors?.mustMatch">Passwords must match</mat-error>
       </mat-form-field>
       <br>
 
@@ -35,5 +35,3 @@
   </div>
   <div fxFlex="30"></div>
 </div>
-
-

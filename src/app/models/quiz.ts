@@ -1,4 +1,5 @@
-import {StatusType} from "./status-type.enum";
+import { StatusType } from "./status-type.enum";
+import { Question } from './question.model';
 
 export class Quiz {
   id: string;
@@ -6,12 +7,13 @@ export class Quiz {
   author: string;
   category_id: string;
   date: Date;
-  image:any;//byte array
+  image: String;//byte array
   description: string;
   status: StatusType;
   modificationTime: Date;
-  category:string;
+  category: string;
   modification_time: Date;
   favorite: boolean;
   tags: string[];
+  questions: Question[];
 }

@@ -1,0 +1,113 @@
+<div fxLayout="column">
+  <mat-accordion *ngIf="isAdmin || isSuperAdmin">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header >
+        <mat-panel-title *ngIf="roleUs.toString() == 'ADMIN'">
+          Add moderator
+        </mat-panel-title>
+        <mat-panel-title *ngIf="roleUs.toString() == 'SUPER_ADMIN'">
+          Add administrative user user
+        </mat-panel-title>
+        <mat-panel-description *ngIf="roleUs.toString() == 'ADMIN'">
+          Enter the data of the new moderator
+        </mat-panel-description>
+        <mat-panel-description *ngIf="roleUs.toString() == 'SUPER_ADMIN'">
+          Enter the data of the new administrative user
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  <div fxLayout="row" class >
+    <div fxFlex="30"></div>
+    <div fxFlex="center center">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input  matInput formControlName="email"  placeholder="Email" name="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+          <mat-error *ngIf="f.email.errors?.required">Email is required</mat-error>
+          <mat-error *ngIf="f.email.errors?.email">Email must be a valid email address</mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="isSuperAdmin">
+          <mat-label>Choose role</mat-label>
+          <mat-select class="form-control" id="selectRole"  formControlName="role">
+            <mat-option value="ADMIN">ADMIN</mat-option>
+            <mat-option value="MODERATOR" >MODERATOR</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button class="btn btn-primary">Add new user</button>
+      </form>
+    </div>
+    <div fxFlex="30"></div>
+  </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+<div #maincontent fxFlex="71" class="scroll main">
+<div class="input">
+  <mat-form-field  appearance="outline">
+    <mat-label>Search quiz</mat-label>
+    <input matInput type="search" placeholder="Search" value="" [(ngModel)]="userRequest"
+           (ngModelChange)="this.userQuestionUpdate.next($event)">
+  </mat-form-field>
+  <mat-form-field class="role_selection">
+    <mat-label>Select role</mat-label>
+    <mat-select [(value)]="selectedRole" disableRipple>
+      <mat-option value="AllRole" (click)="setPaginationParamDefault(); setCurrentRole('AllRole'); onPageChanged($event);" >All</mat-option>
+      <mat-option value="Admins" (click)="setPaginationParamDefault(); setCurrentRole('ADMIN'); onPageChanged($event); ">ADMIN</mat-option>
+      <mat-option value="Moderators" (click)="setPaginationParamDefault(); setCurrentRole('MODERATOR'); onPageChanged($event); ">MODERATOR</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="status_selection">
+    <mat-label>Select status</mat-label>
+    <mat-select [(value)]="selectedStatus" disableRipple>
+      <mat-option value="AllStatus" (click)="setPaginationParamDefault(); setCurrentStatus('AllStatus'); onPageChanged($event);" >All</mat-option>
+      <mat-option value="Active" (click)="setPaginationParamDefault(); setCurrentStatus('ACTIVE'); onPageChanged($event); ">Active</mat-option>
+      <mat-option value="Deactivated" (click)="setPaginationParamDefault(); setCurrentStatus('DEACTIVATED'); onPageChanged($event); ">Deactivated</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8 w-75">
+  <table mat-table [dataSource]="adminUsers" class="mat-elevation-z8" width="100%">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"><a class="nav-link" routerLink=""
+                                                (click)="checkOut(element.id, element.email)">
+        {{element.name}} {{element.surname}}</a></td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.email}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Role</th>
+      <td mat-cell *matCellDef="let element"> {{element.role}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.active">Active</div>
+        <div *ngIf="!element.active">Deactivated</div>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <th  mat-header-cell  *matHeaderCellDef> Acting</th>
+      <td  mat-cell  *matCellDef="let row; let element;">
+        <div class="buttonsAction">
+          <button mat-stroked-button *ngIf="isAdmin && element.active"  (click)="updateActiveStatusUser(element.id)">Deactive</button>
+          <button mat-stroked-button *ngIf="isAdmin && !element.active" (click)="updateActiveStatusUser(element.id)">Active</button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                 (page)="onPageChanged($event); maincontent.scrollTop = 0;">
+  </mat-paginator>
+</div>
+</div>
+  </div>

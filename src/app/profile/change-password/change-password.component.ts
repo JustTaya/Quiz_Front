@@ -15,7 +15,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private profileService: ProfileService,) { }
+              private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.changePasswordForm = this.formBuilder.group({
@@ -35,7 +35,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.changePasswordForm.invalid) {
       return;
     }
-    this.newPassword = this.changePasswordForm.value;
+    this.newPassword = this.changePasswordForm.value.password;
     this.changePassword();
   }
 
@@ -43,6 +43,7 @@ export class ChangePasswordComponent implements OnInit {
     this.profileService.updatePassword(this.newPassword).subscribe(
       (resp: any) => {
         alert("Password was changed")
+        this.router.navigate(['/'])
       },
       error => {
         alert("Something wrong while save password")
@@ -65,5 +66,5 @@ export function MustMatch(controlName: string, matchingControlName: string) {
     } else {
       matchingControl.setErrors(null);
     }
-  }
+  };
 }

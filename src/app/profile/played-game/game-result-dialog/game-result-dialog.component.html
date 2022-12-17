@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+  Game result
+</h1>
+<div mat-dialog-content>
+  <mat-list role="list" *ngFor="let player of players; let indexOfelement=index;">
+    <mat-list-item role="listitem">{{indexOfelement+1}} {{player.userName}}  {{player.userScore}}</mat-list-item>
+
+  </mat-list>
+
+</div>

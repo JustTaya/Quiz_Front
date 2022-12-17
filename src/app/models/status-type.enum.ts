@@ -1,3 +1,6 @@
 export enum StatusType {
-  PENDING, ACTIVE, DEACTIVATED, DELETED
+  PENDING,
+  ACTIVE,
+  DEACTIVATED,
+  DELETED
 }

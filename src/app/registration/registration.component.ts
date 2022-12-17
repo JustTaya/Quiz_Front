@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {RegistrationService} from "../service/registrationService/registration.service";
-import {User} from "../models/user";
-import {AuthenticationService} from "../service/loginService/authentication.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {RegistrationService} from '../service/registrationService/registration.service';
+import {User} from '../models/user';
+import {AuthenticationService} from '../service/loginService/authentication.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
+export enum Gender{
+  MALE,
+  FEMALE,
+  NOT_MENTIONED
+}
 
 @Component({
   selector: 'app-registration',
@@ -13,10 +19,12 @@ import {Router} from "@angular/router";
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
+  public Gender = Gender;
 
-  model:User = {
-    image: undefined, notificationStatus: undefined,
-    about: "",
+  model: User = {
+    image: undefined,
+    notificationStatus: undefined,
+    about: '',
     birthdate: undefined,
     city: "",
     countryId: "",
@@ -30,18 +38,23 @@ export class RegistrationComponent implements OnInit {
     password:''
   };
 
-
-
   constructor(
-    private router : Router,
-    public service : RegistrationService,
+    public service: RegistrationService,
     public authService: AuthenticationService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private router: Router){
+  }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],   ///("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")
+      name: [''],
+      surname: [''],
+      gender: [Gender.NOT_MENTIONED],
+      birthdate: ['1973-01-01'],
+      city: [''],
+      about: [''],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required]
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -54,9 +67,15 @@ export class RegistrationComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    let input: User = JSON.parse(JSON.stringify(this.registerForm.value));
+    const input: User = JSON.parse(JSON.stringify(this.registerForm.value));
     this.model.email = input.email;
     this.model.password = input.password;
+    this.model.name = input.name;
+    this.model.surname = input.surname;
+    this.model.gender = input.gender;
+    this.model.birthdate = input.birthdate;
+    this.model.city = input.city;
+    this.model.about = input.about;
     this.register();
   }
 
@@ -92,6 +111,6 @@ export function MustMatch(controlName: string, matchingControlName: string) {
     } else {
       matchingControl.setErrors(null);
     }
-  }
+  };
 }
 

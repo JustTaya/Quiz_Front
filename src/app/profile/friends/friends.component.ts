@@ -78,7 +78,7 @@ export class FriendsComponent implements OnInit {
 
   filterFriends(userSearch: string) {
     this.profileService.filterFriendsRequest(userSearch, this.pageSize, this.pageIndex, this.sortDirection).subscribe(
-      resp=>{
+      resp => {
         this.friends = resp.responceList;
         this.length = resp.totalNumberOfElement;
       }

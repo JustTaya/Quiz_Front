@@ -1,0 +1,61 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-card>
+        <mat-card-title>
+            <h2>New Quiz</h2>
+        </mat-card-title>
+        <mat-card-content>
+            <div class="form-container">
+                <form [formGroup]="quizForm">
+
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Enter quiz name</mat-label>
+                        <input matInput #input maxlength="30" formControlName="name" placeholder="Quiz name" required>
+                        <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+                        <mat-error
+                            *ngIf="quizForm.get('name').errors?.required && (submitted || quizForm.get('name').touched || quizForm.get('name').dirty)">
+                            You must enter quiz name </mat-error>
+                        <mat-error *ngIf="quizForm.get('name').errors?.maxlength">Quiz name can be max 30 characters
+                            long.
+                        </mat-error>
+                    </mat-form-field>
+
+                    <app-image-upload class="form-field"></app-image-upload>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Select category</mat-label>
+                        <mat-select formControlName="category" value="questionTypes[0]">
+                            <mat-option *ngFor='let category of categories?categories:(loadCategories() |async)'
+                                [value]="category">
+                                {{category.name | titlecase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-chip-list #chipList aria-label="Tag selection">
+                            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                                (removed)="remove(tag)">
+                                {{tag.name}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="Add tag..." [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput class="form-control" formControlName="description"
+                            placeholder="Description"></textarea>
+                        <mat-error *ngIf="quizForm.get('name').errors?.maxlength">Description can be max 360 characters
+                            long.
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button type="submit" (click)="onSubmit()">Next</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

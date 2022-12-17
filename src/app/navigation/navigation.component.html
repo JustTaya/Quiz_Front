@@ -1,14 +1,17 @@
 <mat-toolbar>
   <mat-toolbar-row>
+
     <a mat-button routerLink="/dashboard">QUIZ</a>
     <a mat-button routerLink="/quizzes">Quizzes</a>
     <span class="spacer"></span>
 
-    <mat-form-field appearance="outline" style="margin-bottom: -1.25em">
+    <button mat-stroked-button class="connect-button" *ngIf="isOpen" (click)="isOpen=false">Connect to game</button>
+    <mat-form-field appearance="outline" style="margin-bottom: -1.25em" *ngIf="!isOpen">
       <input matInput #gameId type="number" placeholder="Game id" (keydown.enter)="toGame(gameId.value)">
     </mat-form-field>
 
-    <a mat-button routerLink="/register" *ngIf="!authService.logIn">Register</a>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/registration" *ngIf="!authService.logIn">Register</a>
     <a mat-button routerLink="/login" *ngIf="!authService.logIn">Login</a>
     <a mat-button [routerLink]="['profile', id, {outlets: {profilenav: 'profinfo'}}]"
       *ngIf="authService.logIn">{{username}}</a>

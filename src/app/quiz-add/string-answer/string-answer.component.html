@@ -1,0 +1,12 @@
+<div class="container">
+    <mat-form-field appearance="outline">
+        <mat-label>Enter answer</mat-label>
+        <input matInput class="form-control" placeholder="Answer" aria-label="Answer" aria-describedby="basic-addon1"
+            [formControl]="text" required>
+        <mat-error *ngIf="text.invalid && (submitted ||text.dirty || text.touched)" class="alert alert-danger">
+            <mat-error *ngIf="text.errors.required">
+                Answer is required.
+            </mat-error>
+        </mat-error>
+    </mat-form-field>
+</div>

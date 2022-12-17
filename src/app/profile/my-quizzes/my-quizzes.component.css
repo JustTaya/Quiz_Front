@@ -17,16 +17,35 @@ th, td {
 }
 
 mat-cell, .mat-cell {
-min-height:auto;
-padding: 12px 16px 12px 0;
+  min-height: auto;
+  padding: 12px 16px 12px 0;
 }
 
 
-mat-icon-button{
+mat-icon-button {
   padding-right: 10px;
   width: 50px;
 }
 
 #table {
+  width: 48%;
+}
+
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+  top: 0px;
+  left: 8px;
+}
+
+.mat-expansion-panel {
+  width: 48%;
+}
+
+#add-quiz-button {
   width: 45%;
 }
+
+.reject.mat-row:hover {
+  background-color: whitesmoke;
+}
+
+

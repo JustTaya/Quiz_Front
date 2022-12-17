@@ -7,13 +7,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CurrentUserService } from 'src/app/service/current-user.service';
 import { Game } from 'src/app/models/game.model';
+import { CanComponentDeactivate } from 'src/app/service/canDeactivateGuardService/can-deactivate-guard.service';
 
 @Component({
   selector: 'app-game-start',
   templateUrl: './game-start.component.html',
   styleUrls: ['./game-start.component.css']
 })
-export class GameStartComponent implements OnInit {
+export class GameStartComponent implements OnInit, CanComponentDeactivate {
   gameId: number;
 
   player: Player = {
@@ -31,9 +32,6 @@ export class GameStartComponent implements OnInit {
     private currentUserService: CurrentUserService) {
 
   }
-  ngOnDestroy(): void {
-  }
-
   ngOnInit(): void {
     if (this.authenticationService.logIn) {
       this.player.userId = parseInt(this.currentUserService.getCurrentUser().id);
@@ -62,6 +60,14 @@ export class GameStartComponent implements OnInit {
 
   startGame(): void {
     this.gameService.startGame();
+  }
+
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if (window.confirm('Quit this page?')) {
+      this.gameService.disconnect();
+      return true;
+    }
+    return false;
   }
 
 }

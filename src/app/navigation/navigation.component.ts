@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  isOpen: boolean = true;
   currentUser: any;
   username: string;
   id: string;
@@ -30,6 +31,7 @@ export class NavigationComponent implements OnInit {
   }
 
   toGame(gameId: number) {
+    this.isOpen = true;
     this.router.navigateByUrl(`/game/start/${gameId}`);
   }
 

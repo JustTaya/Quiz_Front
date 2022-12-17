@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ShareIdService} from "../../service/profileService/share-id.service";
+import {Role} from '../../models/role.enum';
+
 
 @Component({
   selector: 'app-profile-navigation',
@@ -8,35 +10,22 @@ import {ShareIdService} from "../../service/profileService/share-id.service";
 })
 export class ProfileNavigationComponent implements OnInit {
   currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  id:any;
+  roleUs: Role;
+  public isAdmin = false;
+  id: any;
 
-  navLinks: any = [
-    {
-      label: 'My Profile',
-      link:'[{outlets: {profilenav: \'profinfo\'}}]',
-      index: 0
-    },
-    {
-      label: 'My friends',
-      link: '[{outlets: {profilenav: \'profinfo\'}}]',
-      index: 1
-    },
-    {
-      label: 'My Quizzes',
-      link: '[{outlets: {profilenav: \'profinfo\'}}]',
-      index: 2
-    },
-    {
-      label: 'Favorite',
-      link: [{outlets: {profilenav: 'profinfo'}}],
-      index: 3
-    }
-  ];
   constructor(private shareId: ShareIdService) {
+    this.id = shareId.shareId();
+    this.roleUs = JSON.parse(localStorage.getItem('currentUser')).role;
   }
-
+  adminCheck(){
+    if (this.roleUs.toString() !== Role[Role.USER]){
+      this.isAdmin = true;
+    }
+  }
   ngOnInit(): void {
     this.id = this.shareId.shareId();
+    this.adminCheck();
   }
 
 }

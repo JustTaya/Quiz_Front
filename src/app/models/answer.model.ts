@@ -1,8 +1,10 @@
 export interface Answer {
     id: number,
     questionId: number,
+    image: string;
     text: string,
     correct: boolean,
-    nextAnswerId: number
-    //TODO: add image
+    nextAnswerId: number,
+    changed: boolean,
+    deleted: boolean
 }

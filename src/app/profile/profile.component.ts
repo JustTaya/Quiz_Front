@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {ShareIdService} from "../service/profileService/share-id.service";
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {ShareIdService} from '../service/profileService/share-id.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
       }
     );
     this.shareId.setId(this.id);
-    this.router.navigate([{outlets: {profilenav: 'profinfo'}}]);
+    // this.router.navigate([{outlets: {profilenav: 'profinfo'}}]);
   }
 
   ngOnInit(): void {

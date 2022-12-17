@@ -1,0 +1,28 @@
+<div class="container">
+    <form [formGroup]="answerForm">
+        <ol formArrayName="items">
+            <li *ngFor="let item of items.controls; let i=index">
+                <div [formGroupName]="i">
+                    <div>
+                        <input id="checkbox" type="checkbox" formControlName="isCorrect" color="primary">
+                        <label for="checkbox">Check if answer is correct</label>
+                    </div>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label>Enter answer name</mat-label>
+                        <input matInput #input maxlength="30" formControlName="text" placeholder="Quiz name">
+                        <mat-error
+                            *ngIf="items.controls[i].get('text').errors?.required && (submitted || items.controls[i].get('text').touched || items.controls[i].get('text').dirty)">
+                            Should have at least two answers.
+                        </mat-error>
+                        <mat-error *ngIf="items.controls[i].get('text').errors?.maxlength"> Answer can be max
+                            30 characters long. </mat-error>
+                        <mat-error *ngIf="items.controls[i].errors?.mustExist">Add text. Next
+                            answer is not empty. </mat-error>
+                    </mat-form-field>
+                    <app-image-upload></app-image-upload>
+                    <mat-divider *ngIf="i!=items.controls.length-1"></mat-divider>
+                </div>
+            </li>
+        </ol>
+    </form>
+</div>

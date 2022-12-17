@@ -1,3 +1,9 @@
 .header {
     font-weight: bold;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}

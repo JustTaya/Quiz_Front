@@ -1,11 +1,17 @@
 <nav mat-tab-nav-bar *ngIf="currentUser.id == id">
   <a mat-tab-link [routerLink]="[{outlets: {profilenav: 'profinfo'}}]"
      routerLinkActive #myProfile="routerLinkActive" [active]="myProfile.isActive">My Profile</a>
-  <a mat-tab-link [routerLink]="[{outlets: {profilenav: 'friends'}}]"
+  <a mat-tab-link *ngIf="!isAdmin" [routerLink]="[{outlets: {profilenav: 'friends'}}]"
      routerLinkActive #myFriends="routerLinkActive" [active]="myFriends.isActive">My friends</a>
-  <a mat-tab-link [routerLink]="[{outlets: {profilenav: 'mygames'}}]"
+  <a mat-tab-link *ngIf="!isAdmin" [routerLink]="[{outlets: {profilenav: 'mygames'}}]"
      routerLinkActive #myQuizzes="routerLinkActive" [active]="myQuizzes.isActive">My Quizzes</a>
-  <a mat-tab-link [routerLink]="[{outlets: {profilenav: 'favorite'}}]"
+  <a mat-tab-link *ngIf="!isAdmin" [routerLink]="[{outlets: {profilenav: 'favorite'}}]"
      routerLinkActive #favorite="routerLinkActive" [active]="favorite.isActive">Favorite</a>
+  <a mat-tab-link *ngIf="!isAdmin" [routerLink]="[{outlets: {profilenav: 'played'}}]"
+     routerLinkActive #games="routerLinkActive" [active]="games.isActive">Played games</a>
+  <a mat-tab-link *ngIf="isAdmin" [routerLink]="[{outlets: {profilenav: 'pendingQuizzes'}}]"
+     routerLinkActive #quizzes="routerLinkActive" [active]="quizzes.isActive">Quizzes</a>
+  <a mat-tab-link *ngIf="isAdmin" [routerLink]="[{outlets: {profilenav: 'adminUsers'}}]"
+     routerLinkActive #admins="routerLinkActive" [active]="admins.isActive">Admin users</a>
 </nav>
 

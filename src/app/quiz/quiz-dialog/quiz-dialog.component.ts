@@ -3,11 +3,10 @@ import { Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Quiz } from 'src/app/models/quiz';
-import { SafeResourceUrl } from '@angular/platform-browser';
+
 
 export interface QuizDialogData {
   quizData: Quiz;
-  quizImage: SafeResourceUrl;
 }
 
 @Component({

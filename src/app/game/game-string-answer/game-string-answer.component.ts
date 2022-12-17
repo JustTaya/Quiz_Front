@@ -19,7 +19,6 @@ export class GameStringAnswerComponent extends GameAnswerComponent {
     let answer = this.getEmptyAnswer();
 
     answer.text = this.stringAnswer.value;
-    answer.questionId = this.questionId;
 
     return [answer];
   }

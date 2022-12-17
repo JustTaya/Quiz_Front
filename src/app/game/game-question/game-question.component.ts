@@ -1,22 +1,24 @@
 import { Player } from './../../models/game.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { GameService } from './../../service/gameService/game.service';
 import { GameStringAnswerComponent } from './../game-string-answer/game-string-answer.component';
 import { GameBooleanAnswerComponent } from './../game-boolean-answer/game-boolean-answer.component';
 import { GameOptionalAnswerComponent } from './../game-optional-answer/game-optional-answer.component';
 import { GameAnswerComponent } from './../game-answer/game-answer.component';
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactory, ComponentFactoryResolver, ComponentRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactory, ComponentFactoryResolver, ComponentRef, AfterViewInit, EventEmitter, HostListener, AfterViewChecked } from '@angular/core';
 import { Question, QuestionType } from 'src/app/models/question.model';
 import { GameSequenceAnswerComponent } from '../game-sequence-answer/game-sequence-answer.component';
 import { Answer } from 'src/app/models/answer.model';
 import { TitleCasePipe } from '@angular/common';
+import { CanComponentDeactivate } from 'src/app/service/canDeactivateGuardService/can-deactivate-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game-question',
   templateUrl: './game-question.component.html',
   styleUrls: ['./game-question.component.css']
 })
-export class GameQuestionComponent implements OnInit, AfterViewInit {
+export class GameQuestionComponent implements OnInit, AfterViewChecked, CanComponentDeactivate {
   @ViewChild('dynamicComponent', { read: ViewContainerRef }) answerHost;
 
   gameId: number;
@@ -33,11 +35,22 @@ export class GameQuestionComponent implements OnInit, AfterViewInit {
 
   componentRef: ComponentRef<GameAnswerComponent>;
 
+  navigationSubscription: any;
+  initialized: boolean = false;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private gameService: GameService) { }
+    private gameService: GameService) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialized = false;
+        this.ngOnInit();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.gameId = this.activatedRoute.snapshot.params['gameId'];
@@ -47,18 +60,22 @@ export class GameQuestionComponent implements OnInit, AfterViewInit {
     this.question = history.state.question;
     this.initTime = history.state.questionTimer;
     this.questionTimer = this.initTime;
+
   }
 
-  ngAfterViewInit(): void {
-    this.loadComponent(this.question.type);
-    this.startTimer();
+  ngAfterViewChecked(): void {
+    if (!this.initialized) {
+      this.initialized = true;
+      this.loadComponent();
+      this.startTimer();
+    }
   }
 
-  loadComponent(value: string) {
+  loadComponent() {
+    while (!this.answerHost) { }
     let titleCasePipe = new TitleCasePipe();
-    value = titleCasePipe.transform(value);
     var componentFactory: ComponentFactory<GameAnswerComponent>;
-    switch (value) {
+    switch (titleCasePipe.transform(this.question.type)) {
       case QuestionType.OPTION:
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(GameOptionalAnswerComponent);
         break;
@@ -80,7 +97,6 @@ export class GameQuestionComponent implements OnInit, AfterViewInit {
     this.componentRef.instance.questionId = this.question.id;
 
     this.componentRef.changeDetectorRef.detectChanges();
-
   }
 
   interval: NodeJS.Timeout;
@@ -100,6 +116,19 @@ export class GameQuestionComponent implements OnInit, AfterViewInit {
 
   submitAnswer() {
     let answers = this.componentRef.instance.getSubmittedAnswers();
+
+    for (let answer of answers) {
+      answer.questionId = this.question.id;
+    }
+
     this.gameService.postAnswer(answers);
+  }
+
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if (window.confirm('Quit this page?')) {
+      this.gameService.disconnect();
+      return true;
+    }
+    return false;
   }
 }

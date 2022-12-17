@@ -1,3 +1,6 @@
+import { Tag } from './tag.model';
+import { Question } from './question.model';
+
 export interface Quiz {
     id: number;
     name: string;
@@ -7,4 +10,8 @@ export interface Quiz {
     description: string;
     status: string;
     modification_time: string;
+    questions: Question[];
+    image: string;
+    tags: Tag[];
+    changed: boolean;
 }

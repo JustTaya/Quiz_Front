@@ -25,7 +25,7 @@ h2, div {
   margin: 0;
 }
 
-/* 
+/*
 mat-card {
   background-color: white;
 } */
@@ -55,11 +55,6 @@ mat-card {
 .game-card {
   width: 10rem;
   height: 8rem;
-}
-
-.announcements {
-  width: 100%;
-  /* height: 50rem; */
 }
 
 .text {
@@ -102,4 +97,19 @@ mat-drawer {
 
 .hidden {
   display: none;
+}
+
+.announcements-list {
+  width: 64rem;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+#announcements-block {
+  height: 500px;
+  overflow: scroll;
 }

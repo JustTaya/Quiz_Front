@@ -2,7 +2,7 @@ import { GameStateService } from './../gameStateService/game-state.service';
 import { Router } from '@angular/router';
 import { Player } from './../../models/game.model';
 import * as SockJs from 'sockjs-client';
-import { RxStomp, RxStompConfig } from '@stomp/rx-stomp';
+
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -10,6 +10,7 @@ import { Game } from 'src/app/models/game.model';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { Answer } from 'src/app/models/answer.model';
 import { map, take } from 'rxjs/operators';
+import {RxStomp, RxStompConfig} from "@stomp/rx-stomp";
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +35,9 @@ export class GameService {
     this.gameId = gameId;
     this.player = player;
 
-    let that = this;
+    const that = this;
 
-    let config = new RxStompConfig();
+    const config = new RxStompConfig();
     config.webSocketFactory = function () { return new SockJs(that.webSocketEndPoint); };
 
     this.client = new RxStomp();
@@ -81,6 +82,7 @@ export class GameService {
     return this.gameObservable.pipe(
       map(resp => {
         let data = JSON.parse(resp);
+        this.disconnect();
         return data['players'];
       })
     );
@@ -99,7 +101,7 @@ export class GameService {
   }
 
   routeQuestion(data: any) {
-    let link = `/game/question/${this.gameId}`;
+    let link = `/game/question/${this.gameId}/${data['questionNumber']}`;
     this.router.navigate([link],
       {
         state: {

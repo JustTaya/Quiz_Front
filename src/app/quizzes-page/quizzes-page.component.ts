@@ -84,6 +84,7 @@ export class QuizzesPageComponent implements OnInit {
   }
 
   getAllQuizzes() {
+    console.log("pagesize " + this.pageSize );
     this.quizService.getQuizzes(this.pageSize, this.pageIndex).subscribe(
       resp => {
         this.currentQuizCategory = undefined;

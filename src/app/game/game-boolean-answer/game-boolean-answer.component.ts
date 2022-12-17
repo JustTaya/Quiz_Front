@@ -22,7 +22,6 @@ export class GameBooleanAnswerComponent extends GameAnswerComponent {
   getSubmittedAnswers(): Answer[] {
     let answer = this.getEmptyAnswer();
     answer.text = this.currentAnswer;
-    answer.questionId = this.questionId;
     return [answer];
   }
 }

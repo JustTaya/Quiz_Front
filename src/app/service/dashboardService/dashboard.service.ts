@@ -24,11 +24,11 @@ export class DashboardService {
   }
 
   getTopQuizzesByCategory(categoryId: number, limit: number): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.TOP_QUIZZES + `\\` + categoryId + "?limit=" + limit);
+    return this.http.get<Quiz[]>(this.TOP_QUIZZES + '/' + categoryId + "?limit=" + limit);
   }
 
   getRecentQuizzes(userId: number, limit: number): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.RECENT_QUIZZES + `\\` + userId + "?limit=" + limit);
+    return this.http.get<Quiz[]>(this.RECENT_QUIZZES + '/' + userId + "?limit=" + limit);
   }
 
   getRating(userId: Number): Observable<number> {
