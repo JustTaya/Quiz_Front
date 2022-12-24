@@ -15,11 +15,11 @@
     </mat-selection-list>
   </div>
   <div #maincontent fxFlex="71" class="scroll main">
-    <div class="input">
+    <div class="input" >
       <mat-form-field  appearance="outline">
         <mat-label>Search quiz</mat-label>
         <input matInput type="search" placeholder="Search" value="" [(ngModel)]="userRequest"
-               (ngModelChange)="this.userQuestionUpdate.next($event)">
+               (ngModelChange)="this.userQuestionUpdate.next($event)" >
       </mat-form-field>
     </div>
     <div fxLayout="row wrap" class="content">

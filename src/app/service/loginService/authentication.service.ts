@@ -39,7 +39,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('currentUser');
-    window.location.replace('/');
+    window.location.replace('/dashboard');
   }
 
   public get logIn(): boolean {

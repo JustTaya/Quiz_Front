@@ -1,31 +1,38 @@
 <mat-drawer-container class="achievement-container">
 
   <mat-drawer #ratingNavbar (backdropClick)="ratingClose()" (keydown.escape)="ratingClose()" mode="side"
-    *ngIf="ratingIsOpen" position="end">
-    <p><button mat-flat-button (click)="ratingClose()" color="accent">Close</button></p>
+              *ngIf="ratingIsOpen" position="end">
+    <p>
+      <button mat-flat-button (click)="ratingClose()" color="accent">Close</button>
+    </p>
     <app-rating-list [userId]="userId" [ratingPos]="rating"></app-rating-list>
   </mat-drawer>
 
   <mat-drawer #achievementsNavbar (backdropClick)=" achievementsClose()" (keydown.escape)="achievementsClose()"
-    mode="side" *ngIf="achievementIsOpen" position="end">
-    <p><button mat-flat-button (click)="achievementsClose()" color="accent">Close</button></p>
+              mode="side" *ngIf="achievementIsOpen" position="end">
+    <p>
+      <button mat-flat-button (click)="achievementsClose()" color="accent">Close</button>
+    </p>
     <app-achievements-list [userId]="userId"></app-achievements-list>
   </mat-drawer>
 
   <mat-drawer-content>
     <div class="background" fxLayout.gt-sm="row" fxLayout.gt-xs="column" fxLayoutWrap fxLayoutGap="3rem"
-      fxLayoutAlign="center">
+         fxLayoutAlign="center">
       <div fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="starts">
         <h2>Progress</h2>
 
         <mat-card id="profile-card">
           <mat-card-content fxLayout="row" fxLayoutAlign="space-around">
             <img mat-card-image id="profile-img" [src]="profileImage"
-              alt="Profile image" fxFlexAlign="end">
+                 alt="Profile image" fxFlexAlign="end">
           </mat-card-content>
           <mat-card-actions fxLayoutAlign="space-around">
-            <button mat-raised-button id="profile-button" class="text" fxFlexAlign="end" color="accent">Go to
-              Profile</button>
+            <button mat-raised-button id="profile-button" class="text" fxFlexAlign="end" color="accent"
+                    (click)="goToProfile()">
+              Go to
+              Profile
+            </button>
           </mat-card-actions>
         </mat-card>
         <mat-card id="rating-card" (click)="ratingOpen()">
@@ -51,8 +58,8 @@
         <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="start">
           <mat-card class="game-card" *ngFor="let quiz of recentQuizzes |async;let i=index">
             <img mat-card-image class="card-image" [src]="getQuizImage(quiz.id) | async"
-              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
-              alt="Game image" fxFlexAlign="end">
+                 onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+                 alt="Game image" fxFlexAlign="end">
             <mat-card-content class="quiz-name" fxLayout="column" fxLayoutAlign="space-between" fxFlexAlign="center">
               <h3>{{quiz.name}}</h3>
             </mat-card-content>
@@ -78,8 +85,8 @@
         <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="start">
           <mat-card class="game-card" *ngFor="let quiz of topQuizzes |async;let i=index">
             <img mat-card-image class="card-image" [src]="getQuizImage(quiz.id) | async"
-              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
-              alt="Quiz image" fxFlexAlign="end">
+                 onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+                 alt="Quiz image" fxFlexAlign="end">
             <mat-card-content class="quiz-name" fxLayout="column" fxLayoutAlign="space-between" fxFlexAlign="center">
               <h3>{{quiz.name}}</h3>
             </mat-card-content>
@@ -90,8 +97,8 @@
         <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1rem" fxLayoutAlign="start">
           <mat-card class="game-card" *ngFor="let quiz of recommendationQuizzes |async;let i=index">
             <img mat-card-image class="card-image" [src]="getQuizImage(quiz.id) | async"
-              onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
-              alt="Quiz image" fxFlexAlign="end">
+                 onerror="this.onerror=null; this.src='https://material.angular.io/assets/img/examples/shiba2.jpg'"
+                 alt="Quiz image" fxFlexAlign="end">
             <mat-card-content class="quiz-name" fxLayout="column" fxLayoutAlign="space-between" fxFlexAlign="center">
               <h3>{{quiz.name}}</h3>
             </mat-card-content>
@@ -99,15 +106,15 @@
           <h3 *ngIf="(recommendationQuizzes |async)==null">Play some games to get recommendations</h3>
         </div>
 
-        <div fxLayout.gt-xs="row" fxLayout.xs="column"  fxLayoutGap="1rem" fxLayoutAlign="space-between">
+        <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="1rem" fxLayoutAlign="space-between">
           <h2>Announcements</h2>
         </div>
 
         <div id="announcements-block">
 
           <div class="announcements-list" fxLayout="column" fxLayoutGap="1rem" fxLayoutAlign="center">
-            <div *ngFor = "let annon of announcement">
-              <mat-card   style="border: 2px solid #ff0000" *ngIf="!annon.generated; else elseBlock">
+            <div *ngFor="let annon of announcement">
+              <mat-card style="border: 2px solid #ff0000" *ngIf="!annon.generated; else elseBlock">
                 <mat-card-header>
                   <mat-card-title>{{annon.date | date:'shortTime'}} </mat-card-title>
                   <mat-card-subtitle>{{annon.date | date}}<br>Administrator announcement</mat-card-subtitle>
@@ -119,7 +126,7 @@
                 </mat-card-content>
               </mat-card>
               <ng-template #elseBlock>
-                <mat-card   style="border: 2px solid #008000">
+                <mat-card style="border: 2px solid #008000">
                   <mat-card-header>
                     <mat-card-title>{{annon.date | date:'shortTime'}}</mat-card-title>
                     <mat-card-subtitle>{{annon.date | date}}<br>Friends activities</mat-card-subtitle>
@@ -134,7 +141,6 @@
             </div>
           </div>
         </div>
-
 
 
       </div>

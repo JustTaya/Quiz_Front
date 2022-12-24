@@ -40,12 +40,18 @@ mat-icon-button {
   width: 48%;
 }
 
-#add-quiz-button {
-  width: 45%;
+.mat-raised-button {
+  width: 455px;
 }
 
 .reject.mat-row:hover {
   background-color: whitesmoke;
+}
+
+.input-form {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 455px;
 }
 
 

@@ -11,6 +11,7 @@ import {map} from 'rxjs/operators'
 import {CurrentUserService} from "../service/current-user.service";
 import {Announcement} from "../models/announcement";
 import {AnnouncementService} from "../service/announcementService/announcement.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -50,8 +51,9 @@ export class DashboardComponent implements OnInit {
               private categoryService: CategoryService,
               private profileService: ProfileService,
               private sanitizer: DomSanitizer,
-              private currentUserService: CurrentUserService,
-              private annoService: AnnouncementService) {
+              public currentUserService: CurrentUserService,
+              private annoService: AnnouncementService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -71,9 +73,8 @@ export class DashboardComponent implements OnInit {
     this.achievementsForUser = this.dashboardService.getAchievementsForUser(this.userId);
 
     this.annoService.getAnnouncement().subscribe(
-      resp => {console.log(resp); this.announcement = resp;}
+      resp => this.announcement = resp
     );
-    //console.log(this.announcement);
   }
 
   achievementsOpen(): void {
@@ -134,5 +135,9 @@ export class DashboardComponent implements OnInit {
         map(resp => resp.text)));
     }
     return this.imageMap.get(quizId);
+  }
+
+  goToProfile() {
+    this.router.navigate(['profile', this.currentUserService.getCurrentUser().id, {outlets: {profilenav: 'profinfo'}}]);
   }
 }

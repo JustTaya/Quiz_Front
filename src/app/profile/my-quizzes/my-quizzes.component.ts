@@ -156,6 +156,9 @@ export class MyQuizzesComponent implements OnInit {
         alert(err.message);
       }
     );
+  }
 
+  onStartClick(id: string): void {
+    this.router.navigate(['/game/settings', id]);
   }
 }

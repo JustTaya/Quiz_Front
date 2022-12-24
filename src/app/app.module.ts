@@ -249,8 +249,8 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/',
-    pathMatch: 'full'
+    redirectTo: '/quizzes',
+    pathMatch: 'full',
   }
 ];
 

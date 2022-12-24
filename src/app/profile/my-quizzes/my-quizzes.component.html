@@ -36,7 +36,7 @@
         <ng-container matColumnDef="actions">
           <th id="actions2" mat-header-cell *matHeaderCellDef> Acting</th>
           <mat-cell *matCellDef="let row">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="editQuiz(row)">
               <mat-icon>edit</mat-icon>
             </button>
           </mat-cell>
@@ -80,17 +80,11 @@
 
 
     <ng-container matColumnDef="actions">
-      <th id="actions" mat-header-cell *matHeaderCellDef alight="center">Acting</th>
+      <th id="actions" mat-header-cell *matHeaderCellDef>Acting</th>
       <mat-cell *matCellDef="let row" fxLayoutAlign="center">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="onStartClick(row.id)">
           <mat-icon>play_arrow</mat-icon>
         </button>
-        <button mat-icon-button (click)="editQuiz(row)">
-          <mat-icon>edit</mat-icon>
-        </button>
-<!--        <button mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>-->
       </mat-cell>
 
     </ng-container>
